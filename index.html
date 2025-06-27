@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+  <title>¿Quieres salir a tomar conmigo?</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Lluvia de texto -->
+  <div class="contenedor-lluvia" id="lluvia"></div>
+
+  <!-- Contenido principal -->
+  <div class="contenedor">
+    <h1>¿Quieres salir a tomar conmigo?</h1>
+    <div class="opciones">
+      <button class="btn" id="btnSi">Sí</button>
+      <button class="btn" id="btnNo">No</button>
+    </div>
+    <p id="mensaje">¡Sabía que dirías que sí, my love! ❤️</p>
+  </div>
+
+  <script>
+    // Botones
+    const btnNo = document.getElementById('btnNo');
+    const btnSi = document.getElementById('btnSi');
+    const mensaje = document.getElementById('mensaje');
+
+    // Movimiento aleatorio en toda la pantalla para el botón "No"
+    btnNo.addEventListener('mouseover', () => {
+      const maxX = window.innerWidth - btnNo.offsetWidth;
+      const maxY = window.innerHeight - btnNo.offsetHeight;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      btnNo.style.position = "absolute";
+      btnNo.style.left = `${x}px`;
+      btnNo.style.top = `${y}px`;
+    });
+
+    btnSi.addEventListener('click', () => {
+      mensaje.style.display = 'block';
+      btnNo.style.display = 'none';
+    });
+
+    // Lluvia de texto
+    const lluvia = document.getElementById("lluvia");
+    const esMovil = window.innerWidth < 600;
+    const columnas = esMovil ? 10 : 30;
+    const filas = 15;
+
+    for (let i = 0; i < columnas; i++) {
+      const col = document.createElement("div");
+      col.className = "columna";
+
+      for (let j = 0; j < filas; j++) {
+        const span = document.createElement("span");
+        span.textContent = "Yo sé que quieres, dime que sí";
+        span.style.animationDelay = `${Math.random() * 3}s`;
+        span.style.animationDuration = `${2 + Math.random() * 1.5}s`;
+        col.appendChild(span);
+      }
+
+      lluvia.appendChild(col);
+    }
+  </script>
+</body>
+</html>

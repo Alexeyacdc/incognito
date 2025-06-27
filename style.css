@@ -1,0 +1,138 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: black;
+  overflow: hidden;
+  height: 100vh;
+  font-family: 'Arial Black', sans-serif;
+  position: relative;
+  color: white;
+}
+
+/* Lluvia de texto */
+.contenedor-lluvia {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  flex-wrap: wrap;
+  pointer-events: none;
+}
+
+.columna {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 10px;
+}
+
+.columna span {
+  color: #ff99ff;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  text-shadow: 0 0 7px #fff, 0 0 20px #ff66cc;
+  animation: caer linear infinite;
+  opacity: 0;
+}
+
+@keyframes caer {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  10%, 90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+/* Contenido principal */
+.contenedor {
+  position: relative;
+  z-index: 10;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
+  width: 90%;
+  max-width: 400px;
+  margin: 100px auto;
+  text-align: center;
+  color: #ff66b3;
+}
+
+h1 {
+  margin: 0 0 20px 0;
+  font-size: 1.5rem;
+}
+
+.opciones {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.btn {
+  padding: 12px 25px;
+  background: #ff66b3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s;
+  min-width: 80px;
+}
+
+.btn:hover {
+  background: #ff3385;
+  transform: scale(1.05);
+}
+
+#mensaje {
+  color: #ff66b3;
+  font-weight: bold;
+  display: none;
+  font-size: 1.2rem;
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .contenedor {
+    padding: 20px;
+    font-size: 0.9rem;
+  }
+
+  .columna span {
+    font-size: 0.6rem;
+  }
+
+  .columna {
+    min-width: 15px;
+    margin: 0 3px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .opciones {
+    flex-direction: column;
+    align-items: center;
+  }
+}
