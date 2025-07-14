@@ -85,8 +85,9 @@ h1 {
 }
 
 #btnNo {
-  position: relative;
-  transition: transform 0.2s ease;
+  position: fixed; /* lo cambiamos a fixed para moverlo por toda la pantalla */
+  transition: left 0.2s ease, top 0.2s ease;
+  z-index: 15;
 }
 
 .btn:hover {
