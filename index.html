@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
-  <title>¿Quieres salir a tomar conmigo?</title>
+  <title>para ti</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -12,21 +12,24 @@
 
   <!-- Contenido principal -->
   <div class="contenedor">
-    <h1>¿Quieres salir a tomar conmigo?</h1>
+    <h1> ¿Quieres ser mi novia? </h1>
     <div class="opciones">
       <button class="btn" id="btnSi">Sí</button>
       <button class="btn" id="btnNo">No</button>
     </div>
-    <p id="mensaje">¡Sabía que dirías que sí, my love! ❤️</p>
+    <p id="mensaje" style="display: none;">
+      ¡Sabía que dirías que sí, my love! ❤️<br>
+      <span id="contador"></span>
+    </p>
   </div>
 
   <script>
-    // Botones
     const btnNo = document.getElementById('btnNo');
     const btnSi = document.getElementById('btnSi');
     const mensaje = document.getElementById('mensaje');
+    const contador = document.getElementById('contador');
 
-    // Movimiento aleatorio en toda la pantalla para el botón "No"
+    // Movimiento aleatorio para el botón "No"
     btnNo.addEventListener('mouseover', () => {
       const maxX = window.innerWidth - btnNo.offsetWidth;
       const maxY = window.innerHeight - btnNo.offsetHeight;
@@ -38,15 +41,38 @@
       btnNo.style.top = `${y}px`;
     });
 
+    // Mostrar mensaje y activar contador
     btnSi.addEventListener('click', () => {
       mensaje.style.display = 'block';
       btnNo.style.display = 'none';
+      actualizarContador();
+      setInterval(actualizarContador, 1000);
     });
+
+    // Función para calcular tiempo desde el 7 de julio 2025, 11:00 PM
+    function actualizarContador() {
+      const inicio = new Date("2025-07-07T23:00:00");
+      const ahora = new Date();
+      const diferencia = ahora - inicio;
+
+      if (diferencia < 0) {
+        contador.textContent = "Aún no llega el momento mágico 🕰️";
+        return;
+      }
+
+      const totalSegundos = Math.floor(diferencia / 1000);
+      const dias = Math.floor(totalSegundos / (60 * 60 * 24));
+      const horas = Math.floor((totalSegundos % (60 * 60 * 24)) / 3600);
+      const minutos = Math.floor((totalSegundos % 3600) / 60);
+      const segundos = totalSegundos % 60;
+
+      contador.textContent = `Han pasado ${dias} día(s), ${horas} hora(s), ${minutos} minuto(s) y ${segundos} segundo(s) desde que dijiste que sí ❤️`;
+    }
 
     // Lluvia de texto
     const lluvia = document.getElementById("lluvia");
-    const esMovil = window.innerWidth < 600;
-    const columnas = esMovil ? 10 : 30;
+    const esMovil = window.innerWidth < 500;
+    const columnas = esMovil ? 8 : 20;
     const filas = 15;
 
     for (let i = 0; i < columnas; i++) {
