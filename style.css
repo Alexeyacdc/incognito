@@ -59,6 +59,7 @@ body {
   100% { transform: translateY(-120vh) scale(1.2) rotate(10deg); opacity: 0; }
 }
 
+/* Estilos para frases caídas */
 .frase-caida {
   position: fixed;
   top: -30px;
@@ -76,20 +77,10 @@ body {
 }
 
 @keyframes caer-suave {
-  0% {
-    transform: translateY(0);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(110vh);
-    opacity: 0;
-  }
+  0% { transform: translateY(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(110vh); opacity: 0; }
 }
 
 .contenedor {
@@ -101,7 +92,7 @@ body {
   box-shadow: 0 8px 25px rgba(255, 155, 255, 0.3);
   width: 90%;
   max-width: 420px;
-  margin: 20px auto 0;
+  margin: 100px auto;
   text-align: center;
   color: #ffd1f7;
   box-shadow: 0 4px 24px #ffb3ec, 0 1.5px 8px #c44fff;
