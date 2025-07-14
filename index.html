@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF- />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>para ti</title>
+  <title>Para ti</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Fondo estrellas -->
   <div class="fondo-estrellado">
     <div class="estrellas" id="estrellas"></div>
   </div>
 
-  <!-- Contenido principal -->
   <div class="contenedor">
-    <h1> ¿Quieres ser mi novia? </h1>
+    <h1>¿Quieres ser mi novia?</h1>
     <div class="opciones">
       <button class="btn" id="btnSi">Sí</button>
       <button class="btn" id="btnNo">No</button>
     </div>
-
     <p id="mensaje" style="display: none;">
       <span id="fraseAmor"></span><br />
       <span id="contador"></span><br />
@@ -57,19 +54,18 @@
       "Siempre contigo, siempre tú", "No existe nadie como tú", "Eres mi mayor bendición"
     ];
 
-btnNo.addEventListener('mouseenter', () => {
-  const contenedor = document.body;
-  const maxX = window.innerWidth - btnNo.offsetWidth - 20;
-  const maxY = window.innerHeight - btnNo.offsetHeight - 20;
+    // Botón "No" se mueve por toda la pantalla sin salirse
+    btnNo.addEventListener('mouseenter', () => {
+      const maxX = window.innerWidth - btnNo.offsetWidth - 20;
+      const maxY = window.innerHeight - btnNo.offsetHeight - 20;
 
-  const randomX = Math.floor(Math.random() * maxX);
-  const randomY = Math.floor(Math.random() * maxY);
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
 
-  btnNo.style.position = "fixed";
-  btnNo.style.left = `${randomX}px`;
-  btnNo.style.top = `${randomY}px`;
-});
-
+      btnNo.style.position = "fixed";
+      btnNo.style.left = `${randomX}px`;
+      btnNo.style.top = `${randomY}px`;
+    });
 
     btnSi.addEventListener('click', () => {
       mensaje.style.display = 'block';
@@ -118,7 +114,7 @@ btnNo.addEventListener('mouseenter', () => {
       const frase = document.createElement("span");
       frase.textContent = frasesCaen[Math.floor(Math.random() * frasesCaen.length)];
       frase.classList.add("frase-caida");
-      frase.style.left = `${Math.random() * 90 + 5}%`;
+      frase.style.left = `${Math.random() * (window.innerWidth - 200)}px`;
       frase.style.animationDuration = `${8 + Math.random() * 4}s`;
       document.body.appendChild(frase);
       frase.addEventListener("animationend", () => frase.remove());
@@ -136,11 +132,6 @@ btnNo.addEventListener('mouseenter', () => {
       estrella.style.animationDelay = `${Math.random() * 2}s`;
       estrellas.appendChild(estrella);
     }
-  </script>
-</body>
-</html>
-
-    setInterval(crearFraseCaida, 900);
   </script>
 </body>
 </html>
