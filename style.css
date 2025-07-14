@@ -85,7 +85,7 @@ h1 {
 }
 
 #btnNo {
-  position: fixed; /* lo cambiamos a fixed para moverlo por toda la pantalla */
+  position: fixed;
   transition: left 0.2s ease, top 0.2s ease;
   z-index: 15;
 }
@@ -143,6 +143,7 @@ h1 {
   pointer-events: none;
   animation: caer-suave linear forwards;
   opacity: 0;
+  max-width: 200px;
 }
 
 @keyframes caer-suave {
@@ -169,6 +170,6 @@ h1 {
 
   .frase-caida {
     font-size: 1rem;
-    max-width: 90vw;
+    max-width: 140px;
   }
 }
