@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF- />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Para ti</title>
+  <title>para ti</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Fondo estrellas -->
   <div class="fondo-estrellado">
     <div class="estrellas" id="estrellas"></div>
   </div>
 
+  <!-- Contenido principal -->
   <div class="contenedor">
-    <h1>¿Quieres ser mi novia?</h1>
+    <h1> ¿Quieres ser mi novia? </h1>
     <div class="opciones">
       <button class="btn" id="btnSi">Sí</button>
       <button class="btn" id="btnNo">No</button>
     </div>
+
     <p id="mensaje" style="display: none;">
       <span id="fraseAmor"></span><br />
       <span id="contador"></span><br />
@@ -42,29 +45,14 @@
       "Contigo, todo tiene sentido"
     ];
 
-    const frasesCaen = [
-      "Eres mi luz en la oscuridad", "Cada día te quiero más", "Contigo todo es mejor",
-      "Mi corazón late por ti", "Eres mi sueño hecho realidad", "Juntos somos invencibles",
-      "Tú y yo, para siempre", "No hay nada sin ti", "Eres mi felicidad diaria",
-      "Amarte es mi destino", "Tus ojos brillan como estrellas", "Eres mi sol en días nublados",
-      "Sin ti no soy nada", "Quiero estar a tu lado siempre", "Tu sonrisa ilumina mi vida",
-      "Eres mi razón para sonreír", "Mi amor crece cada día", "Nuestro amor es infinito",
-      "Contigo aprendí a amar", "Eres mi mejor regalo", "Te pienso a cada instante",
-      "Eres mi paz y mi tormenta", "Quiero cuidarte siempre", "Tu amor me hace fuerte",
-      "Siempre contigo, siempre tú", "No existe nadie como tú", "Eres mi mayor bendición"
-    ];
-
-    // Botón "No" se mueve por toda la pantalla sin salirse
+    // Movimiento suave para botón NO
     btnNo.addEventListener('mouseenter', () => {
-      const maxX = window.innerWidth - btnNo.offsetWidth - 20;
-      const maxY = window.innerHeight - btnNo.offsetHeight - 20;
-
-      const randomX = Math.random() * maxX;
-      const randomY = Math.random() * maxY;
-
-      btnNo.style.position = "fixed";
-      btnNo.style.left = `${randomX}px`;
-      btnNo.style.top = `${randomY}px`;
+      const maxOffset = 20; // px
+      const direction = Math.random() < 0.5 ? -1 : 1;
+      btnNo.style.transform = `translateX(${direction * maxOffset}px)`;
+    });
+    btnNo.addEventListener('mouseleave', () => {
+      btnNo.style.transform = 'translateX(0)';
     });
 
     btnSi.addEventListener('click', () => {
@@ -73,9 +61,12 @@
       fraseAmor.textContent = frases[Math.floor(Math.random() * frases.length)];
       fuegos.innerHTML = "🎆✨💞🎇";
 
-      for (let i = 0; i < 30; i++) crearCorazonFlotante();
-      setInterval(actualizarContador, 1000);
+      for (let i = 0; i < 30; i++) {
+        crearCorazonFlotante();
+      }
+
       actualizarContador();
+      setInterval(actualizarContador, 1000);
 
       setTimeout(() => {
         secreto.style.display = 'inline';
@@ -86,12 +77,10 @@
       const inicio = new Date("2025-07-07T23:00:00");
       const ahora = new Date();
       const diferencia = ahora - inicio;
-
       if (diferencia < 0) {
         contador.textContent = "Aún no llega el momento mágico 🕰️";
         return;
       }
-
       const totalSegundos = Math.floor(diferencia / 1000);
       const dias = Math.floor(totalSegundos / (60 * 60 * 24));
       const horas = Math.floor((totalSegundos % (60 * 60 * 24)) / 3600);
@@ -110,18 +99,6 @@
       setTimeout(() => heart.remove(), 6000);
     }
 
-    function crearFraseCaida() {
-      const frase = document.createElement("span");
-      frase.textContent = frasesCaen[Math.floor(Math.random() * frasesCaen.length)];
-      frase.classList.add("frase-caida");
-      frase.style.left = `${Math.random() * (window.innerWidth - 200)}px`;
-      frase.style.animationDuration = `${8 + Math.random() * 4}s`;
-      document.body.appendChild(frase);
-      frase.addEventListener("animationend", () => frase.remove());
-    }
-
-    setInterval(crearFraseCaida, 1000);
-
     // Estrellas
     const estrellas = document.getElementById("estrellas");
     for (let i = 0; i < 100; i++) {
@@ -132,6 +109,61 @@
       estrella.style.animationDelay = `${Math.random() * 2}s`;
       estrellas.appendChild(estrella);
     }
+
+    // Frases que caen suavemente (lista ampliada)
+    const frasesCaen = [
+      "Eres mi luz en la oscuridad",
+      "Cada día te quiero más",
+      "Contigo todo es mejor",
+      "Mi corazón late por ti",
+      "Eres mi sueño hecho realidad",
+      "Juntos somos invencibles",
+      "Tú y yo, para siempre",
+      "No hay nada sin ti",
+      "Eres mi felicidad diaria",
+      "Amarte es mi destino",
+      "Tus ojos brillan como estrellas",
+      "Eres mi sol en días nublados",
+      "Sin ti no soy nada",
+      "Quiero estar a tu lado siempre",
+      "Tu sonrisa ilumina mi vida",
+      "Eres mi razón para sonreír",
+      "Mi amor crece cada día",
+      "Nuestro amor es infinito",
+      "Contigo aprendí a amar",
+      "Eres mi mejor regalo",
+      "Juntos somos un equipo",
+      "Te pienso a cada instante",
+      "Eres mi paz y mi tormenta",
+      "Quiero cuidarte siempre",
+      "Tu amor me hace fuerte",
+      "Eres mi hogar",
+      "Siempre contigo, siempre tú",
+      "No existe nadie como tú",
+      "Eres mi mayor bendición",
+      "Gracias por ser tú"
+    ];
+
+    function crearFraseCaida() {
+      const fraseSpan = document.createElement("span");
+      fraseSpan.textContent = frasesCaen[Math.floor(Math.random() * frasesCaen.length)];
+      fraseSpan.classList.add("frase-caida");
+
+      const esMovil = window.innerWidth <= 600;
+      const leftPos = esMovil
+        ? Math.random() * 80 + 10 // 10% a 90% para móvil
+        : Math.random() * 90 + 5; // 5% a 95% para desktop
+      fraseSpan.style.left = `${leftPos}%`;
+
+      fraseSpan.style.animationDuration = `${8 + Math.random() * 5}s`;
+      document.body.appendChild(fraseSpan);
+
+      fraseSpan.addEventListener('animationend', () => {
+        fraseSpan.remove();
+      });
+    }
+
+    setInterval(crearFraseCaida, 900);
   </script>
 </body>
 </html>
