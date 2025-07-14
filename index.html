@@ -46,14 +46,32 @@
     ];
 
     // Movimiento suave para botón NO
-    btnNo.addEventListener('mouseenter', () => {
-      const maxOffset = 20; // px
-      const direction = Math.random() < 0.5 ? -1 : 1;
-      btnNo.style.transform = `translateX(${direction * maxOffset}px)`;
-    });
-    btnNo.addEventListener('mouseleave', () => {
-      btnNo.style.transform = 'translateX(0)';
-    });
+// Movimiento amplio para botón NO (por toda la ventana)
+let moviendoNo = false;
+// Movimiento amplio y suave para botón NO (por toda la ventana, sin salirse)
+btnNo.style.transition = "left 0.4s cubic-bezier(.68,-0.55,.27,1.55), top 0.4s cubic-bezier(.68,-0.55,.27,1.55)";
+
+btnNo.addEventListener('mouseenter', () => {
+  const btnRect = btnNo.getBoundingClientRect();
+  const btnWidth = btnRect.width;
+  const btnHeight = btnRect.height;
+  const margin = 10;
+
+  // Calcula los límites máximos dentro del viewport
+  const minLeft = margin;
+  const minTop = margin;
+  const maxLeft = window.innerWidth - btnWidth - margin;
+  const maxTop = window.innerHeight - btnHeight - margin;
+
+  // Genera nuevas posiciones aleatorias dentro de los límites
+  const newLeft = Math.random() * (maxLeft - minLeft) + minLeft;
+  const newTop = Math.random() * (maxTop - minTop) + minTop;
+
+  btnNo.style.position = 'fixed';
+  btnNo.style.left = `${newLeft}px`;
+  btnNo.style.top = `${newTop}px`;
+  btnNo.style.transform = 'none';
+});
 
     btnSi.addEventListener('click', () => {
       mensaje.style.display = 'block';
@@ -162,6 +180,11 @@
         fraseSpan.remove();
       });
     }
+
+    setInterval(crearFraseCaida, 900);
+  </script>
+</body>
+</html>
 
     setInterval(crearFraseCaida, 900);
   </script>
