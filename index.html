@@ -45,12 +45,24 @@
       "Contigo, todo tiene sentido"
     ];
 
-    // Movimiento suave para botón NO
+    const frasesCaen = [
+      "Eres mi luz en la oscuridad", "Cada día te quiero más", "Contigo todo es mejor",
+      "Mi corazón late por ti", "Eres mi sueño hecho realidad", "Juntos somos invencibles",
+      "Tú y yo, para siempre", "No hay nada sin ti", "Eres mi felicidad diaria",
+      "Amarte es mi destino", "Tus ojos brillan como estrellas", "Eres mi sol en días nublados",
+      "Sin ti no soy nada", "Quiero estar a tu lado siempre", "Tu sonrisa ilumina mi vida",
+      "Eres mi razón para sonreír", "Mi amor crece cada día", "Nuestro amor es infinito",
+      "Contigo aprendí a amar", "Eres mi mejor regalo", "Te pienso a cada instante",
+      "Eres mi paz y mi tormenta", "Quiero cuidarte siempre", "Tu amor me hace fuerte",
+      "Siempre contigo, siempre tú", "No existe nadie como tú", "Eres mi mayor bendición"
+    ];
+
     btnNo.addEventListener('mouseenter', () => {
-      const maxOffset = 20; // px
+      const maxOffset = 20;
       const direction = Math.random() < 0.5 ? -1 : 1;
       btnNo.style.transform = `translateX(${direction * maxOffset}px)`;
     });
+
     btnNo.addEventListener('mouseleave', () => {
       btnNo.style.transform = 'translateX(0)';
     });
@@ -61,12 +73,9 @@
       fraseAmor.textContent = frases[Math.floor(Math.random() * frases.length)];
       fuegos.innerHTML = "🎆✨💞🎇";
 
-      for (let i = 0; i < 30; i++) {
-        crearCorazonFlotante();
-      }
-
-      actualizarContador();
+      for (let i = 0; i < 30; i++) crearCorazonFlotante();
       setInterval(actualizarContador, 1000);
+      actualizarContador();
 
       setTimeout(() => {
         secreto.style.display = 'inline';
@@ -77,10 +86,12 @@
       const inicio = new Date("2025-07-07T23:00:00");
       const ahora = new Date();
       const diferencia = ahora - inicio;
+
       if (diferencia < 0) {
         contador.textContent = "Aún no llega el momento mágico 🕰️";
         return;
       }
+
       const totalSegundos = Math.floor(diferencia / 1000);
       const dias = Math.floor(totalSegundos / (60 * 60 * 24));
       const horas = Math.floor((totalSegundos % (60 * 60 * 24)) / 3600);
@@ -99,6 +110,18 @@
       setTimeout(() => heart.remove(), 6000);
     }
 
+    function crearFraseCaida() {
+      const frase = document.createElement("span");
+      frase.textContent = frasesCaen[Math.floor(Math.random() * frasesCaen.length)];
+      frase.classList.add("frase-caida");
+      frase.style.left = `${Math.random() * 90 + 5}%`;
+      frase.style.animationDuration = `${8 + Math.random() * 4}s`;
+      document.body.appendChild(frase);
+      frase.addEventListener("animationend", () => frase.remove());
+    }
+
+    setInterval(crearFraseCaida, 1000);
+
     // Estrellas
     const estrellas = document.getElementById("estrellas");
     for (let i = 0; i < 100; i++) {
@@ -109,59 +132,9 @@
       estrella.style.animationDelay = `${Math.random() * 2}s`;
       estrellas.appendChild(estrella);
     }
-
-    // Frases que caen suavemente (lista ampliada)
-    const frasesCaen = [
-      "Eres mi luz en la oscuridad",
-      "Cada día te quiero más",
-      "Contigo todo es mejor",
-      "Mi corazón late por ti",
-      "Eres mi sueño hecho realidad",
-      "Juntos somos invencibles",
-      "Tú y yo, para siempre",
-      "No hay nada sin ti",
-      "Eres mi felicidad diaria",
-      "Amarte es mi destino",
-      "Tus ojos brillan como estrellas",
-      "Eres mi sol en días nublados",
-      "Sin ti no soy nada",
-      "Quiero estar a tu lado siempre",
-      "Tu sonrisa ilumina mi vida",
-      "Eres mi razón para sonreír",
-      "Mi amor crece cada día",
-      "Nuestro amor es infinito",
-      "Contigo aprendí a amar",
-      "Eres mi mejor regalo",
-      "Juntos somos un equipo",
-      "Te pienso a cada instante",
-      "Eres mi paz y mi tormenta",
-      "Quiero cuidarte siempre",
-      "Tu amor me hace fuerte",
-      "Eres mi hogar",
-      "Siempre contigo, siempre tú",
-      "No existe nadie como tú",
-      "Eres mi mayor bendición",
-      "Gracias por ser tú"
-    ];
-
-    function crearFraseCaida() {
-      const fraseSpan = document.createElement("span");
-      fraseSpan.textContent = frasesCaen[Math.floor(Math.random() * frasesCaen.length)];
-      fraseSpan.classList.add("frase-caida");
-
-      const esMovil = window.innerWidth <= 600;
-      const leftPos = esMovil
-        ? Math.random() * 80 + 10 // 10% a 90% para móvil
-        : Math.random() * 90 + 5; // 5% a 95% para desktop
-      fraseSpan.style.left = `${leftPos}%`;
-
-      fraseSpan.style.animationDuration = `${8 + Math.random() * 5}s`;
-      document.body.appendChild(fraseSpan);
-
-      fraseSpan.addEventListener('animationend', () => {
-        fraseSpan.remove();
-      });
-    }
+  </script>
+</body>
+</html>
 
     setInterval(crearFraseCaida, 900);
   </script>
