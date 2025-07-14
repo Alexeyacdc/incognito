@@ -57,15 +57,19 @@
       "Siempre contigo, siempre tú", "No existe nadie como tú", "Eres mi mayor bendición"
     ];
 
-    btnNo.addEventListener('mouseenter', () => {
-      const maxOffset = 20;
-      const direction = Math.random() < 0.5 ? -1 : 1;
-      btnNo.style.transform = `translateX(${direction * maxOffset}px)`;
-    });
+btnNo.addEventListener('mouseenter', () => {
+  const contenedor = document.body;
+  const maxX = window.innerWidth - btnNo.offsetWidth - 20;
+  const maxY = window.innerHeight - btnNo.offsetHeight - 20;
 
-    btnNo.addEventListener('mouseleave', () => {
-      btnNo.style.transform = 'translateX(0)';
-    });
+  const randomX = Math.floor(Math.random() * maxX);
+  const randomY = Math.floor(Math.random() * maxY);
+
+  btnNo.style.position = "fixed";
+  btnNo.style.left = `${randomX}px`;
+  btnNo.style.top = `${randomY}px`;
+});
+
 
     btnSi.addEventListener('click', () => {
       mensaje.style.display = 'block';
